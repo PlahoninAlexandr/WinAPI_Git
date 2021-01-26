@@ -1,7 +1,5 @@
 #include <Windows.h>
 
-int width{}, height{};
-
 int CALLBACK wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR szCmdLine, int nCmdShow) {
 	MSG msg{};
 	HWND hwnd{};
@@ -17,24 +15,11 @@ int CALLBACK wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR szCmdLine, int nCmdS
 	wc.lpfnWndProc = [](HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)->LRESULT {
 		switch (uMsg)
 		{
-			case WM_CREATE:
-			{
-				MessageBox(hWnd, L"Hello", L"Ok", MB_ICONINFORMATION);
-			}
-			return 0;
-
-			case WM_SIZE:
-			{
-				width = LOWORD(lParam);
-				height = HIWORD(lParam);
-			}
-			return 0;
-
-			case WM_DESTROY:
-			{
-				PostQuitMessage(EXIT_SUCCESS);
-			}
-			return 0;
+		case WM_DESTROY:
+		{
+			PostQuitMessage(EXIT_SUCCESS);
+		}
+		return 0;
 		}
 		return DefWindowProc(hWnd, uMsg, wParam, lParam);
 	};
