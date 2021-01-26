@@ -1,3 +1,7 @@
+#pragma comment(linker,"\"/manifestdependency:type='win32' \
+name='Microsoft.Windows.Common-Controls' version='6.0.0.0' \
+processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
+
 #include <Windows.h>
 
 int CALLBACK wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR szCmdLine, int nCmdShow) {
@@ -15,11 +19,35 @@ int CALLBACK wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR szCmdLine, int nCmdS
 	wc.lpfnWndProc = [](HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)->LRESULT {
 		switch (uMsg)
 		{
-		case WM_DESTROY:
-		{
-			PostQuitMessage(EXIT_SUCCESS);
-		}
-		return 0;
+			case WM_CREATE:
+			{
+				HWND hButton = CreateWindow(
+					L"Button",
+					L"Ok!",
+					WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+					0, 0, 300, 30, hWnd, reinterpret_cast<HMENU>(1337), nullptr, nullptr
+				);
+			}
+			return 0;
+
+			case WM_COMMAND:
+			{
+				switch (LOWORD(wParam))
+				{
+					case 1337:
+					{
+						MessageBox(hWnd, L"Do", L"ne", MB_ICONINFORMATION);
+					}
+					break;
+				}
+			}
+			return 0;
+		
+			case WM_DESTROY:
+			{
+				PostQuitMessage(EXIT_SUCCESS);
+			}
+			return 0;
 		}
 		return DefWindowProc(hWnd, uMsg, wParam, lParam);
 	};
