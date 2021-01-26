@@ -30,7 +30,7 @@ int CALLBACK wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR szCmdLine, int nCmdS
 	if (!RegisterClassEx(&wc))
 		return EXIT_FAILURE;
 
-	if (hwnd = CreateWindow(wc.lpszClassName, L"Заголовок", WS_OVERLAPPEDWINDOW, 0, 0, 600, 600, nullptr, nullptr, wc.hInstance, nullptr); hwnd == INVALID_HANDLE_VALUE)
+	if (hwnd = CreateWindow(wc.lpszClassName, L"Заголовок", WS_OVERLAPPEDWINDOW, 100, 100, 600, 600, nullptr, nullptr, wc.hInstance, nullptr); hwnd == INVALID_HANDLE_VALUE)
 		return EXIT_FAILURE;
 
 	ShowWindow(hwnd, nCmdShow);
